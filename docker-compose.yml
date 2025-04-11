@@ -1,0 +1,29 @@
+services:
+  php:
+      build: .
+      container_name: knapsack_problem_php
+      restart: unless-stopped
+      working_dir: /var/www
+      volumes:
+        - .:/var/www
+      networks:
+        - knapsack_problem_network
+  nginx:
+    image: nginx:latest
+    container_name: knapsack_problem_nginx
+    restart: unless-stopped
+    ports:
+      - "4000:80"
+    volumes:
+      - .:/var/www
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - knapsack_problem_network
+    depends_on:
+      - php
+
+volumes:
+  mysql_data:
+
+networks:
+  knapsack_problem_network:
