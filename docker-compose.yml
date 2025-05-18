@@ -1,5 +1,5 @@
 services:
-  php:
+  knapsack-api-php:
       build: .
       container_name: knapsack_problem_php
       restart: unless-stopped
@@ -8,7 +8,7 @@ services:
         - .:/var/www
       networks:
         - knapsack_problem_network
-  nginx:
+  knapsack-api-nginx:
     image: nginx:latest
     container_name: knapsack_problem_nginx
     restart: unless-stopped
